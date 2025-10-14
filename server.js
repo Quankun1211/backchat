@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: [
       `http://localhost:${PORT}`,
-      "https://68ee6c98f8c9bd4047d272b1--tranquil-bonbon-41a99c.netlify.app",
+      "https://68ee71790278f06dc181d881--tranquil-bonbon-41a99c.netlify.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
