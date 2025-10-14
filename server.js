@@ -7,7 +7,7 @@ import authRoutes from "./routes/authRouts.js"
 import messageRoutes from "./routes/messageRoutes.js" 
 import userRoutes from "./routes/userRoutes.js" 
 import { app, server } from "./socket/socket.js"
-
+import cors from "cors";
 const PORT = process.env.PORT || 5000
 
 const __dirname = path.resolve()
