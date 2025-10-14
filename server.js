@@ -13,7 +13,16 @@ const PORT = process.env.PORT || 5000
 const __dirname = path.resolve()
 
 dotenv.config()
-
+app.use(
+  cors({
+    origin: [
+      `http://localhost:${PORT}`,
+      "https://68ee6c98f8c9bd4047d272b1--tranquil-bonbon-41a99c.netlify.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json())
 app.use(cookieParser())
 
