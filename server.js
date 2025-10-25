@@ -23,6 +23,11 @@ app.use(
     credentials: true,
   })
 );
+app.use((req, res, next) => {
+  console.error(`❌ 404 Not Found: ${req.originalUrl}`);
+  res.status(404).json({ error: 'Not Found', path: req.originalUrl });
+});
+
 app.use(express.json())
 app.use(cookieParser())
 
