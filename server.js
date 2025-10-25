@@ -11,6 +11,7 @@ import cors from "cors";
 const PORT = process.env.PORT || 5000
 
 const __dirname = path.resolve()
+console.log("🟢 Running server.js on Render");
 
 dotenv.config()
 app.use(
