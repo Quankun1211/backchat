@@ -22,7 +22,9 @@ app.get("/", (req, res) => {
 const allowedOrigins = [
   "http://localhost:3000",
   "https://68fe379b114e4e6ea20fdb58--golden-brigadeiros-c5bc0e.netlify.app",
-  "https://stellular-mousse-67013d.netlify.app"
+  "https://stellular-mousse-67013d.netlify.app",
+  "https://imaginative-creponne-1f6f19.netlify.app",
+  "https://68fe3c73d22b697a431602ed--imaginative-creponne-1f6f19.netlify.app"
 ];
 
 app.use(
