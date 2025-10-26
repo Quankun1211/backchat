@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/userModel.js";
 
-const protectRoute = async (async (req, res, next) => {
+const protectRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     console.log("Cookie jwt:", token); // Debug
@@ -23,6 +23,6 @@ const protectRoute = async (async (req, res, next) => {
     console.error("ProtectRoute error:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
 export default protectRoute;
