@@ -3,7 +3,6 @@ import http from "http";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import protectRoute from "./middleware/protectRoute.js"; // Giả sử bạn có file này
 
 const app = express();
 const server = http.createServer(app);
@@ -68,14 +67,5 @@ io.on("connection", (socket) => {
 export const getReceiverSocketId = (receiverId) => {
   return userSocketMap[receiverId] || null; // Trả về null nếu không tìm thấy
 };
-
-// Route ví dụ
-app.get("/api/user/", protectRoute, (req, res) => {
-  res.json({ message: "User route accessed", user: req.user });
-});
-
-// Khởi động server
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 export { app, io, server };
