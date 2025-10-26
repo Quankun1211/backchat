@@ -14,8 +14,8 @@ const allowedOrigins = [
   "https://68fe379b114e4e6ea20fdb58--golden-brigadeiros-c5bc0e.netlify.app", // Thêm origin mới
   "https://stellular-mousse-67013d.netlify.app",
   "https://golden-brigadeiros-c5bc0e.netlify.app",
-    "https://ephemeral-froyo-cf835a.netlify.app",
-  "https://68fe3e646eae167f08e06411--ephemeral-froyo-cf835a.netlify.app"
+  "https://chimerical-mandazi-263460.netlify.app",
+  "https://68fe3fe59145817f4e2c8681--chimerical-mandazi-263460.netlify.app"
 ];
 
 // Cấu hình CORS cho HTTP API
