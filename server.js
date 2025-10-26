@@ -21,8 +21,10 @@ app.get("/", (req, res) => {
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://68fe22095ce7792a7e94ab2d--thriving-sundae-adaf5e.netlify.app",
+  "https://68fe276f6ac664372eaef996--marvelous-beijinho-986c72.netlify.app",
+  "https://marvelous-beijinho-986c72.netlify.app/"
 ];
+
 
 // Cấu hình CORS cho Express
 app.use(
