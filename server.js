@@ -21,8 +21,8 @@ app.get("/", (req, res) => {
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://68fe3546114e4e61ba0fdbd1--stellular-mousse-67013d.netlify.app/",
-  "https://stellular-mousse-67013d.netlify.app/"
+  "https://68fe3546114e4e61ba0fdbd1--stellular-mousse-67013d.netlify.app",
+  "https://stellular-mousse-67013d.netlify.app"
 ];
 
 
