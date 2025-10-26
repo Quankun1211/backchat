@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/userModel.js";
-import asyncHandler from "express-async-handler";
 
-const protectRoute = asyncHandler(async (req, res, next) => {
+const protectRoute = async (async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     console.log("Cookie jwt:", token); // Debug
