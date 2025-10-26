@@ -19,16 +19,33 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Chat API is running!" });
 });
 
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://68fdec38673ad3c44d292b32--vocal-klepon-b4c66c.netlify.app",
+  // Thêm các domain Netlify preview khác nếu cần
+];
+
+// CẤU HÌNH CORS CHI TIẾT
 app.use(
   cors({
-    origin: [
-      `http://localhost:3000`, // Sửa: frontend thường chạy trên 3000, không phải 5000
-      "https://68ee71790278f06dc181d881--tranquil-bonbon-41a99c.netlify.app",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
+    optionsSuccessStatus: 200, 
   })
 );
+
+// BẮT BUỘC: Xử lý preflight request
+app.options("*", cors()); // Hoặc để mặc định trong cors() là đủ
+
 
 app.use(express.json());
 app.use(cookieParser());
