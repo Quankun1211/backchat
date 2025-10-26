@@ -22,15 +22,12 @@ app.get("/", (req, res) => {
 const allowedOrigins = [
   "http://localhost:3000",
   "https://68fe379b114e4e6ea20fdb58--golden-brigadeiros-c5bc0e.netlify.app",
-  "https://golden-brigadeiros-c5bc0e.netlify.app"
+  "https://stellular-mousse-67013d.netlify.app"
 ];
 
-
-// Cấu hình CORS cho Express
 app.use(
   cors({
     origin: (origin, callback) => {
-      console.log("Request Origin:", origin); // Debug origin
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -40,7 +37,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-    optionsSuccessStatus: 200,
+    optionsSuccessStatus: 200
   })
 );
 
