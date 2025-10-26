@@ -19,13 +19,12 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Chat API is running!" });
 });
 
-
 const allowedOrigins = [
   "http://localhost:3000",
   "https://68fe22095ce7792a7e94ab2d--thriving-sundae-adaf5e.netlify.app",
 ];
 
-// CẤU HÌNH CORS CHI TIẾT
+// Cấu hình CORS cho Express
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -38,7 +37,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-    optionsSuccessStatus: 200, 
+    optionsSuccessStatus: 200,
   })
 );
 
