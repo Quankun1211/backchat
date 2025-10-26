@@ -1,41 +1,81 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import protectRoute from "./middleware/protectRoute.js"; // Giả sử bạn có file này
 
 const app = express();
+const server = http.createServer(app);
 
-// Dùng chung allowedOrigins từ server.js
+// Dùng chung allowedOrigins
 const allowedOrigins = [
   "http://localhost:3000",
   "https://68fe22095ce7792a7e94ab2d--thriving-sundae-adaf5e.netlify.app",
+  "https://68fe379b114e4e6ea20fdb58--golden-brigadeiros-c5bc0e.netlify.app", // Thêm origin mới
+  "https://stellular-mousse-67013d.netlify.app",
+  "https://golden-brigadeiros-c5bc0e.netlify.app"
 ];
 
-const server = http.createServer(app);
+// Cấu hình CORS cho HTTP API
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+    optionsSuccessStatus: 200
+  })
+);
+app.use(express.json());
+
+// Cấu hình Socket.IO
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins, // Dùng chung allowedOrigins
     methods: ["GET", "POST"],
-    credentials: true,
-  },
+    credentials: true
+  }
 });
 
-export const getReceiverSocketId = (receiverId) => {
-  return useSocketMap[receiverId];
-};
-
-const useSocketMap = {};
+// Quản lý userSocketMap
+const userSocketMap = {};
 
 io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
-  if (userId !== "undefined") useSocketMap[userId] = socket.id;
+  if (userId && userId !== "undefined") {
+    userSocketMap[userId] = socket.id;
+    console.log(`User ${userId} connected with socket ID: ${socket.id}`);
+  }
 
-  io.emit("getOnlineUsers", Object.keys(useSocketMap));
+  io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
   socket.on("disconnect", () => {
-    console.log("Disconnected:", socket.id);
-    delete useSocketMap[userId];
-    io.emit("getOnlineUsers", Object.keys(useSocketMap));
+    console.log(`User ${userId} disconnected: ${socket.id}`);
+    delete userSocketMap[userId];
+    io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
+
+// Hàm lấy socket ID của receiver
+export const getReceiverSocketId = (receiverId) => {
+  return userSocketMap[receiverId] || null; // Trả về null nếu không tìm thấy
+};
+
+// Route ví dụ
+app.get("/api/user/", protectRoute, (req, res) => {
+  res.json({ message: "User route accessed", user: req.user });
+});
+
+// Khởi động server
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 export { app, io, server };
