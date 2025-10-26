@@ -22,8 +22,7 @@ app.get("/", (req, res) => {
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://68fdec38673ad3c44d292b32--vocal-klepon-b4c66c.netlify.app",
-  // Thêm các domain Netlify preview khác nếu cần
+  "https://68fe22095ce7792a7e94ab2d--thriving-sundae-adaf5e.netlify.app",
 ];
 
 // CẤU HÌNH CORS CHI TIẾT
